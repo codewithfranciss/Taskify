@@ -8,6 +8,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
 import { useToast } from '@/components/ui/use-toast';
+import logo from "@/public/logo.png"
+import Image from 'next/image';
 
 export default function Page() {
   const [email, setEmail] = useState<string>('');
@@ -53,7 +55,10 @@ export default function Page() {
     <>
       <Navbar />
       <div className='min-h-screen w-full flex flex-col items-center mt-16'>
+        <div className='flex items-center gap-2'>
         <h1 className='text-center text-2xl font-extrabold'>Sign in</h1>
+        <Image src={logo} alt="logo" width={40} height={40} />
+        </div>
         <form onSubmit={handleSignIn} className='mt-5 w-full max-w-md px-4'>
           <label htmlFor="email" className='text-sm'>
             Email:

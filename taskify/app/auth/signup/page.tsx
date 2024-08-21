@@ -10,7 +10,7 @@ import { useToast } from '@/components/ui/use-toast';
 import { useRouter } from 'next/navigation';
 
 export default function Page() {
-  const { toast } = useToast(); // Initialize the toast hook
+  const { toast } = useToast(); 
   const [username, setUsername] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -31,6 +31,32 @@ export default function Page() {
           },
         },
       });
+
+      const { user } = data;
+      if (user) {
+        const { error: profileError } = await supabase
+          .from('users')
+          .insert({
+            id: user.id,
+            email: email,
+            name: username,
+          });
+
+        if (profileError) {
+          toast({
+            title: "Error",
+            description: profileError.message,
+            variant: "destructive",
+          });
+        } else {
+          toast({
+            title: "Success",
+            description: "check ur email for verification link",
+            variant: "default",
+          });
+          router.push('/auth/signin');
+        }
+      }
 
       if (error) {
         toast({
