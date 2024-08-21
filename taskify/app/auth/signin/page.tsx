@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { FaGoogle } from "react-icons/fa";
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-
+import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
 import { useToast } from '@/components/ui/use-toast';
 
@@ -13,7 +13,7 @@ export default function Page() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
- 
+  const router = useRouter();
   const { toast } = useToast();
 
   const handleSignIn = async (e: FormEvent) => {
@@ -35,7 +35,7 @@ export default function Page() {
           description: "Sign-in successful!",
           variant: "default",
         });
-       
+        router.push('/dashboard')
       }
     } catch (err) {
       toast({
@@ -48,6 +48,7 @@ export default function Page() {
     }
   };
 
+  
   return (
     <>
       <Navbar />
@@ -82,8 +83,9 @@ export default function Page() {
           </Button>
         </form>
         <p className='py-1 font-extrabold text-slate-300'>Or</p>
-        <Button className='gap-2 bg-white text-black py-4 hover:bg-slate-300 hover:text-black'>
-          Continue with Google <FaGoogle />
+        <Button 
+          className='gap-2 bg-white text-black py-4 hover:bg-slate-300 hover:text-black' >
+        Continue with Google <FaGoogle />
         </Button>
         <p className='py-2 font-bold text-black text-sm text-left'>
           Don't have an account? <Link href="/auth/signup" className='underline'>Create</Link>
