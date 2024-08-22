@@ -3,7 +3,7 @@ import "./globals.css";
 import { JetBrains_Mono } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
 const inter = JetBrains_Mono({ subsets: ["latin"] });
-
+6
 export const metadata: Metadata = {
   title: "Taskify",
   description: "Task Manager for Student",

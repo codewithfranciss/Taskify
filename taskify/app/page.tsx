@@ -38,13 +38,13 @@ export default function Home() {
               isOpen ? "block" : "hidden"
             } md:flex md:space-x-9 absolute md:static top-16 left-0 w-full md:w-auto bg-white md:bg-transparent p-4 md:p-0`}
           >
-            <Link href="#" className="text-black hover:text-slate-300">
+            <Link href="#" className="text-black font-bold hover:text-slate-300">
               Home
             </Link>
-            <Link href="#" className="text-black hover:text-slate-300">
+            <Link href="#" className="text-black font-bold hover:text-slate-300">
               About
             </Link>
-            <Link href="#" className="text-black hover:text-slate-300">
+            <Link href="#" className="text-black font-bold hover:text-slate-300">
               Contact
             </Link>
           </div>
