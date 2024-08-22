@@ -51,15 +51,15 @@ export default function Sidebar() {
         </Button>
       </div>
       <nav className="flex flex-col mt-8 flex-grow">
-        <Link href="/dashboard/flashcards" className={cn("flex items-center p-4 hover:bg-slate-300 dark:hover:bg-gray-700", isCollapsed && "justify-center")}>
+        <Link href="/dashboard" className={cn("flex items-center p-4 hover:bg-slate-300 dark:hover:bg-gray-700", isCollapsed && "justify-center")}>
           <FaHome className="text-xl dark:text-white" />
           {!isCollapsed && <span className="ml-4 text-slate-500 dark:text-gray-400">Dashboard</span>}
         </Link>
-        <Link href="/profile" className={cn("flex items-center p-4 hover:bg-slate-300 dark:hover:bg-gray-700", isCollapsed && "justify-center")}>
+        <Link href="/dashboard/flashcards" className={cn("flex items-center p-4 hover:bg-slate-300 dark:hover:bg-gray-700", isCollapsed && "justify-center")}>
           <PiCardsLight className="text-xl dark:text-white" />
           {!isCollapsed && <span className="ml-4 text-slate-500 dark:text-gray-400">Flashcards</span>}
         </Link>
-        <Link href="/pomodoro" className={cn("flex items-center p-4 hover:bg-slate-300 dark:hover:bg-gray-700", isCollapsed && "justify-center")}>
+        <Link href="/dashboard/pomodoro" className={cn("flex items-center p-4 hover:bg-slate-300 dark:hover:bg-gray-700", isCollapsed && "justify-center")}>
           <FaClock className="text-xl dark:text-white" />
           {!isCollapsed && <span className="ml-4 text-slate-500 dark:text-gray-400">Pomodoro</span>}
         </Link>
@@ -88,19 +88,19 @@ export default function Sidebar() {
                 "transition-all duration-300 ease-in-out"
               )}
             >
-              <Link href="/daily-todos" className="block p-2 hover:bg-slate-300 dark:hover:bg-gray-700">
+              <Link href="goals" className="block p-2 hover:bg-slate-300 dark:hover:bg-gray-700">
                 <span className="text-slate-500 dark:text-gray-400">Semester Goals</span>
               </Link>
-              <Link href="/study-group" className="block p-2 hover:bg-slate-300 dark:hover:bg-gray-700">
+              <Link href="/dashboard/school/timetable" className="block p-2 hover:bg-slate-300 dark:hover:bg-gray-700">
                 <span className="text-slate-500 dark:text-gray-400">Timetable</span>
               </Link>
-              <Link href="/habit-tracker" className="block p-2 hover:bg-slate-300 dark:hover:bg-gray-700">
+              <Link href="/dashboard/school/assignment-task" className="block p-2 hover:bg-slate-300 dark:hover:bg-gray-700">
                 <span className="text-slate-500 dark:text-gray-400">Assignment/Tasks</span>
               </Link>
-              <Link href="/habit-tracker" className="block p-2 hover:bg-slate-300 dark:hover:bg-gray-700">
+              <Link href="/dashboard/school/materials" className="block p-2 hover:bg-slate-300 dark:hover:bg-gray-700">
                 <span className="text-slate-500 dark:text-gray-400">Materials</span>
               </Link>
-              <Link href="/habit-tracker" className="block p-2 hover:bg-slate-300 dark:hover:bg-gray-700">
+              <Link href="/dashboard/school/school-events" className="block p-2 hover:bg-slate-300 dark:hover:bg-gray-700">
                 <span className="text-slate-500 dark:text-gray-400">School events</span>
               </Link>
             </div>
@@ -114,27 +114,27 @@ export default function Sidebar() {
             isSchoolDropdownOpen && !isCollapsed ? "max-h-screen" : "max-h-0"
           )}
         >
-          <Link href="/daily-todos" className="flex items-center p-2 hover:bg-slate-300 dark:hover:bg-gray-700">
+          <Link href="goals" className="flex items-center p-2 hover:bg-slate-300 dark:hover:bg-gray-700">
             <span className="ml-4 text-slate-500 dark:text-gray-400">Semester Goals</span>
           </Link>
-          <Link href="/study-group" className="flex items-center p-2 hover:bg-slate-300 dark:hover:bg-gray-700">
+          <Link href="/dashboard/school/timetable" className="flex items-center p-2 hover:bg-slate-300 dark:hover:bg-gray-700">
             <span className="ml-4 text-slate-500 dark:text-gray-400">Timetable</span>
           </Link>
-          <Link href="/habit-tracker" className="flex items-center p-2 hover:bg-slate-300 dark:hover:bg-gray-700">
+          <Link href="/dashboard/school/assignment-task" className="flex items-center p-2 hover:bg-slate-300 dark:hover:bg-gray-700">
             <span className="ml-4 text-slate-500 dark:text-gray-400">Assignment/Task</span>
           </Link>
-          <Link href="/habit-tracker" className="flex items-center p-2 hover:bg-slate-300 dark:hover:bg-gray-700">
+          <Link href="/dashboard/school/materials" className="flex items-center p-2 hover:bg-slate-300 dark:hover:bg-gray-700">
             <span className="ml-4 text-slate-500 dark:text-gray-400">Materials</span>
           </Link>
-          <Link href="/habit-tracker" className="flex items-center p-2 hover:bg-slate-300 dark:hover:bg-gray-700">
+          <Link href="/dashboard/school/school-events" className="flex items-center p-2 hover:bg-slate-300 dark:hover:bg-gray-700">
             <span className="ml-4 text-slate-500 dark:text-gray-400">School events</span>
           </Link>
         </div>
-        <Link href="/profile" className={cn("flex items-center p-4 hover:bg-slate-300 dark:hover:bg-gray-700", isCollapsed && "justify-center")}>
+        <Link href="/dashboard/todo" className={cn("flex items-center p-4 hover:bg-slate-300 dark:hover:bg-gray-700", isCollapsed && "justify-center")}>
         <LuListTodo className="text-xl dark:text-white" />
           {!isCollapsed && <span className="ml-4 text-slate-500 dark:text-gray-400">Daily Todos</span>}
         </Link>
-        <Link href="/profile" className={cn("flex items-center p-4 hover:bg-slate-300 dark:hover:bg-gray-700", isCollapsed && "justify-center")}>
+        <Link href="/dashboard/study-groups" className={cn("flex items-center p-4 hover:bg-slate-300 dark:hover:bg-gray-700", isCollapsed && "justify-center")}>
           <IoPeopleSharp className="text-xl dark:text-white" />
           {!isCollapsed && <span className="ml-4 text-slate-500 dark:text-gray-400">Study Groups</span>}
         </Link>
