@@ -114,7 +114,7 @@ export default function Sidebar() {
             isSchoolDropdownOpen && !isCollapsed ? "max-h-screen" : "max-h-0"
           )}
         >
-          <Link href="goals" className="flex items-center p-2 hover:bg-slate-300 dark:hover:bg-gray-700">
+          <Link href="school/goals" className="flex items-center p-2 hover:bg-slate-300 dark:hover:bg-gray-700">
             <span className="ml-4 text-slate-500 dark:text-gray-400">Semester Goals</span>
           </Link>
           <Link href="/dashboard/school/timetable" className="flex items-center p-2 hover:bg-slate-300 dark:hover:bg-gray-700">
