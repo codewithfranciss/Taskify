@@ -67,9 +67,9 @@ export default function Home() {
           <p className="text-lg text-gray-700 mb-4">
             Manage your tasks effectively and boost your productivity with Taskify.
           </p>
-          <button className="bg-black text-white font-extrabold px-6 py-3 rounded-full hover:bg-slate-600 transition">
-            Learn More
-          </button>
+          <Link href='/auth/signin'><button className="bg-black text-white font-extrabold px-6 py-3 rounded-full hover:bg-slate-600 transition">
+            Sign in
+          </button></Link>
         </div>
         <div>
           <Image src={work} alt="Working at home" width={350} height={450} />

@@ -24,7 +24,8 @@ export default function Navbar() {
         const user = session.user;
         console.log('User:', user);
         setFullName(user.user_metadata.full_name || '');  // Handle possible undefined
-      }
+      }else
+      router.push('/auth/signin')
     };
 
     fetchUserData();

@@ -22,7 +22,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { supabase } from '@/lib/supabaseClient';
 import { useRouter } from 'next/navigation';
-
+import Link from 'next/link';
 type Course = {
   id: string;
   title: string;
@@ -61,7 +61,7 @@ export default function Page() {
         }
       } else {
         // If no session, redirect to login
-        router.push('/login');
+        router.push('/auth/signin');
       }
 
       setLoading(false);
@@ -95,7 +95,7 @@ export default function Page() {
   return (
     <>
     <div className='m-7 flex justify-between'>
-      <h1 className='text-lg font-bold'>Your Courses:</h1>
+      <h1 className='text-lg font-bold'>Your Flashcards:</h1>
       <div className=''>
         <Dialog open={isDialogOpen} onOpenChange={setDialogOpen}>
           <DialogTrigger asChild>
@@ -107,7 +107,7 @@ export default function Page() {
             </DialogHeader>
             <div className="grid gap-4 py-4">
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="title" className="text-right">Title:</Label>
+                <Label htmlFor="title" className="text-right">Course code:</Label>
                 <Input
                   id="title"
                   placeholder='e.g., Intro to Computing'
@@ -127,17 +127,20 @@ export default function Page() {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <ul className='my-4 mx-4 gap-3  flex'>
+        <ul className='my-4 mx-4 gap-3 flex-wrap  flex'>
           {courses.map((course) => (
-            <Card className="w-[350px] flex">
+          <Link href={`/dashboard/flashcards/${course.id}`}>
+          <Card className="w-48 ">
             <CardHeader>
-              <CardTitle>{course.title}</CardTitle>
-              <CardDescription>Deploy your new project in one-click.</CardDescription>
+              <CardTitle className='text-center'>{course.title}</CardTitle>
+              <CardDescription className='text-center text-lg font-bold'>1</CardDescription>
             </CardHeader>
 
           </Card>
+          </Link>
           ))}
         </ul>
+        
       )}
     
     </>
