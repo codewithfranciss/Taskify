@@ -15,7 +15,7 @@ export default function Dashboard({
     <Sidebar />
     <div className="flex flex-col flex-1">
       <Navbar />
-      <main>
+      <main className="dark:bg-gray-800 h-screen">
         {children}
       </main>
     </div>

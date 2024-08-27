@@ -40,7 +40,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="flex justify-between bg-white text-black p-4 border w-full">
+    <nav className="flex justify-between bg-white dark:bg-gray-800 dark:border-0 text-black p-4 border w-full">
       <div className="flex items-center flex-grow space-x-4">
         <div className='ml-auto flex flex-row items-center'>
           <div className='mr-9 flex items-center space-x-4'>
