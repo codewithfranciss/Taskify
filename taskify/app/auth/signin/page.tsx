@@ -93,7 +93,7 @@ export default function Page() {
         Continue with Google <FaGoogle />
         </Button>
         <p className='py-2 font-bold text-black text-sm text-left'>
-          Don't have an account? <Link href="/auth/signup" className='underline'>Create</Link>
+          Don&apos;t have an account? <Link href="/auth/signup" className='underline'>Create</Link>
         </p>
       </div>
     </>
