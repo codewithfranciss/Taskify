@@ -17,12 +17,13 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { supabase } from '@/lib/supabaseClient';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+
 type Course = {
   id: string;
   title: string;
@@ -44,7 +45,7 @@ export default function Page() {
         return;
       }
 
-      if (session) {
+      if (session?.user?.id) {
         // Extract user ID
         const userId = session.user.id;
 
@@ -57,7 +58,7 @@ export default function Page() {
         if (error) {
           console.error('Error fetching courses:', error);
         } else {
-          setCourses(courses);
+          setCourses(courses || []); // Safeguard for `courses` being potentially null
         }
       } else {
         // If no session, redirect to login
@@ -73,9 +74,16 @@ export default function Page() {
   const handleCreateDeck = async () => {
     if (!title) return; // Skip if no title
 
+    const { data: { session } } = await supabase.auth.getSession();
+
+    if (!session?.user?.id) {
+      console.error('No session found, cannot create deck');
+      return;
+    }
+
     const { data, error } = await supabase
       .from('courses')
-      .insert({ title, user_id: (await supabase.auth.getSession()).data.session.user.id })
+      .insert({ title, user_id: session.user.id })
       .select();
 
     if (error) {
@@ -94,55 +102,52 @@ export default function Page() {
 
   return (
     <>
-    <div className='m-7 flex justify-between'>
-      <h1 className='text-lg font-bold'>Your Flashcards:</h1>
-      <div className=''>
-        <Dialog open={isDialogOpen} onOpenChange={setDialogOpen}>
-          <DialogTrigger asChild>
-            <Button className="bg-black text-white" variant="outline">Create Deck</Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
-            <DialogHeader>
-              <DialogTitle>Create a New Deck</DialogTitle>
-            </DialogHeader>
-            <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="title" className="text-right">Course code:</Label>
-                <Input
-                  id="title"
-                  placeholder='e.g., Intro to Computing'
-                  className="col-span-3"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                />
+      <div className='m-7 flex justify-between'>
+        <h1 className='text-lg font-bold'>Your Flashcards:</h1>
+        <div>
+          <Dialog open={isDialogOpen} onOpenChange={setDialogOpen}>
+            <DialogTrigger asChild>
+              <Button className="bg-black text-white" variant="outline">Create Deck</Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>Create a New Deck</DialogTitle>
+              </DialogHeader>
+              <div className="grid gap-4 py-4">
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="title" className="text-right">Course code:</Label>
+                  <Input
+                    id="title"
+                    placeholder='e.g., Intro to Computing'
+                    className="col-span-3"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                  />
+                </div>
               </div>
-            </div>
-            <DialogFooter>
-              <Button type="button" onClick={handleCreateDeck}>Create</Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+              <DialogFooter>
+                <Button type="button" onClick={handleCreateDeck}>Create</Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <ul className='my-4 mx-4 gap-3 flex-wrap  flex'>
+        <ul className='my-4 mx-4 gap-3 flex-wrap flex'>
           {courses.map((course) => (
-          <Link href={`/dashboard/flashcards/${course.id}`}>
-          <Card className="w-48 ">
-            <CardHeader>
-              <CardTitle className='text-center'>{course.title}</CardTitle>
-              <CardDescription className='text-center text-lg font-bold'>1</CardDescription>
-            </CardHeader>
-
-          </Card>
-          </Link>
+            <Link href={`/dashboard/flashcards/${course.id}`} key={course.id}>
+              <Card className="w-48">
+                <CardHeader>
+                  <CardTitle className='text-center'>{course.title}</CardTitle>
+                  <CardDescription className='text-center text-lg font-bold'>1</CardDescription>
+                </CardHeader>
+              </Card>
+            </Link>
           ))}
         </ul>
-        
       )}
-    
     </>
   );
 }
